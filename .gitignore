@@ -7,7 +7,7 @@ Icon?
 .Spotlight-V100
 .Trashes
 
-# ==== 编辑器 / IDE ====
+# ==== Editors / IDE ====
 .vscode/
 .idea/
 *.swp
@@ -15,35 +15,35 @@ Icon?
 *~
 .history/
 
-# ==== 日志 / 临时 ====
+# ==== Logs / temp ====
 *.log
 *.tmp
 *.bak
 .cache/
 
-# ==== 系统文件 ====
+# ==== OS files ====
 Thumbs.db
 Desktop.ini
 
-# ==== Node（若日后引入构建工具） ====
+# ==== Node (if build tools are introduced later) ====
 node_modules/
 package-lock.json
 npm-debug.log*
 
-# ==== Python（若日后用脚本辅助） ====
+# ==== Python (if helper scripts are used later) ====
 __pycache__/
 *.pyc
 .venv/
 venv/
 
-# ==== 环境变量 / 密钥（绝不入库） ====
+# ==== Environment variables / secrets (never commit) ====
 .env
 .env.*
 
-# ==== 设计稿 / 大文件工作目录（按需启用） ====
+# ==== Drafts / raw assets (enable as needed) ====
 # _drafts/
 # assets_raw/
 
-# ==== 常见压缩包 ====
+# ==== Archives ====
 *.zip
 *.tar.gz

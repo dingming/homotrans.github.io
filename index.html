@@ -7,18 +7,18 @@
   <meta name="description" content="ホモトランステクノロジー合同会社（HomoTrans Technology）— ロボット・AI システムの研究開発を主業とする技術カンパニー。現在設立準備中です。">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='4' y='4' width='92' height='92' rx='18' fill='%23050b14'/><path d='M22 62 L40 62 L40 40 L58 40 L58 62 L78 62' stroke='%2300d4ff' stroke-width='7' fill='none' stroke-linecap='round'/></svg>">
   <style>
-    /* ============ 深空科技风 · 网格 / 电光 / 终端 ============ */
+    /* ============ Dark tech theme · grid / neon / terminal ============ */
     :root {
-      --bg: #050b14;         /* 深空底 */
+      --bg: #050b14;         /* deep space */
       --bg-2: #0a1524;
       --panel: rgba(14, 26, 42, .82);
-      --fg: #d6e4f0;          /* 冰白 */
+      --fg: #d6e4f0;          /* ice white */
       --fg-dim: #7d93ad;
-      --cyan: #00d4ff;        /* 电光青 */
+      --cyan: #00d4ff;        /* electric cyan */
       --cyan-soft: rgba(0, 212, 255, .14);
       --blue: #3b82f6;
       --violet: #8b5cf6;
-      --green: #22e0a0;       /* 信号绿 */
+      --green: #22e0a0;       /* signal green */
       --amber: #ffb347;
       --line: rgba(0, 212, 255, .18);
       --grid: rgba(120, 160, 200, .07);
@@ -34,7 +34,7 @@
       overflow-x: hidden;
     }
 
-    /* 背景层：网格 + 光晕 */
+    /* Background layers: grid + glow */
     .bg-layer {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
     }
@@ -53,7 +53,7 @@
         radial-gradient(ellipse 620px 380px at 78% 8%, rgba(0,212,255,.10), transparent 65%),
         radial-gradient(ellipse 560px 420px at 12% 92%, rgba(139,92,246,.08), transparent 60%);
     }
-    /* 扫描线动画 */
+    /* Scanline animation */
     .bg-scan {
       position: absolute; left: 0; right: 0; top: -2px;
       height: 2px;
@@ -64,7 +64,7 @@
 
     .wrap { position: relative; z-index: 1; }
 
-    /* ============ 顶部导航 ============ */
+    /* ============ Top navigation ============ */
     nav {
       position: sticky; top: 0; z-index: 10;
       display: flex; align-items: center; justify-content: space-between;
@@ -130,7 +130,7 @@
       text-transform: uppercase;
     }
 
-    /* 终端窗口 */
+    /* Terminal window */
     .terminal {
       margin-top: 52px;
       width: min(680px, 100%);
@@ -201,7 +201,7 @@
       50% { opacity: .3; }
     }
 
-    /* ============ 通用 section ============ */
+    /* ============ Common sections ============ */
     section { padding: 84px 24px; }
     .section-inner { max-width: 960px; margin: 0 auto; }
     .sec-head { text-align: center; margin-bottom: 48px; }
@@ -227,7 +227,7 @@
       text-transform: uppercase;
     }
 
-    /* ============ 技术栈 / 事业 ============ */
+    /* ============ Tech stack / business ============ */
     .stack { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .stack-grid {
       display: grid;
@@ -268,7 +268,7 @@
     }
     .tech-card p { font-size: 13px; color: var(--fg-dim); }
 
-    /* ============ 会社概要 ============ */
+    /* ============ Company profile ============ */
     .profile-table {
       width: 100%;
       border-collapse: separate; border-spacing: 0;
@@ -394,7 +394,7 @@
       </div>
     </header>
 
-    <!-- ============ 技术领域 ============ -->
+    <!-- ============ Tech domains ============ -->
     <section class="stack" id="stack">
       <div class="section-inner">
         <div class="sec-head">
@@ -430,7 +430,7 @@
       </div>
     </section>
 
-    <!-- ============ 会社概要 ============ -->
+    <!-- ============ Company profile ============ -->
     <section id="profile">
       <div class="section-inner">
         <div class="sec-head">

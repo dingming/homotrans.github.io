@@ -1,22 +1,22 @@
 # homotrans.github.io
 
-HomoTrans Technology（ホモトランステクノロジー合同会社）官方网站（GitHub Pages）。
+Official website of HomoTrans Technology (ホモトランステクノロジー合同会社) — hosted on GitHub Pages.
 
-当前状态：公司设立准备中，网站为 Coming Soon 雏形。
+Current status: the company is in preparation for incorporation (設立準備中). This site is a pre-launch "Coming Soon" page.
 
-## 主营业务
+## Core Business
 
-- ロボット・ロボットシステム及び関連機器の研究開発・設計・製造・販売・保守
-- AI（人工知能）製品・システム・ソフトウェアの研究開発
-- 組込みシステム・制御システム・IoT クラウドシステムの研究開発
-- 受託開発・導入支援・技術コンサルティング
+- Research, development, design, manufacturing, sales and maintenance of robots, robotic systems and related equipment
+- Research, development and operation of AI-based products, systems and software
+- Research and development of embedded systems, control systems and IoT/cloud platforms
+- Contract development, deployment support and technical consulting
 
-## 本地预览
+## Local Preview
 
-直接用浏览器打开 `index.html`，或：
+Open `index.html` directly in a browser, or:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-访问 http://localhost:8000
+Then visit http://localhost:8000
