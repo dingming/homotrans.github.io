@@ -3,413 +3,488 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HomoTrans Technology — ホモトランステクノロジー合同会社｜設立準備中</title>
-  <meta name="description" content="ホモトランステクノロジー合同会社（HomoTrans Technology）— ロボット・AI システムの研究開発を主業とする技術カンパニー。現在設立準備中です。Webサイトは準備中です。">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='8' y='8' width='84' height='84' rx='14' fill='%23a03a2e'/><text x='50' y='66' font-size='52' text-anchor='middle' fill='%23f5f0e6' font-family='serif' font-weight='700'>準</text></svg>">
+  <title>HomoTrans Technology — Robotics &amp; AI Systems R&amp;D</title>
+  <meta name="description" content="ホモトランステクノロジー合同会社（HomoTrans Technology）— ロボット・AI システムの研究開発を主業とする技術カンパニー。現在設立準備中です。">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='4' y='4' width='92' height='92' rx='18' fill='%23050b14'/><path d='M22 62 L40 62 L40 40 L58 40 L58 62 L78 62' stroke='%2300d4ff' stroke-width='7' fill='none' stroke-linecap='round'/></svg>">
   <style>
-    /* ============ 中式水墨美学 · 宣纸 / 朱砂 / 墨 ============ */
+    /* ============ 深空科技风 · 网格 / 电光 / 终端 ============ */
     :root {
-      --paper: #f5f0e6;        /* 宣纸 */
-      --paper-deep: #ece5d3;   /* 宣纸·深 */
-      --ink: #2b2b28;          /* 墨 */
-      --ink-soft: #57534c;     /* 淡墨 */
-      --ink-faint: #8f8878;    /* 枯墨 */
-      --cinnabar: #a03a2e;     /* 朱砂 */
-      --cinnabar-deep: #7c2a20;
-      --gold: #b08d4f;         /* 泥金 */
+      --bg: #050b14;         /* 深空底 */
+      --bg-2: #0a1524;
+      --panel: rgba(14, 26, 42, .82);
+      --fg: #d6e4f0;          /* 冰白 */
+      --fg-dim: #7d93ad;
+      --cyan: #00d4ff;        /* 电光青 */
+      --cyan-soft: rgba(0, 212, 255, .14);
+      --blue: #3b82f6;
+      --violet: #8b5cf6;
+      --green: #22e0a0;       /* 信号绿 */
+      --amber: #ffb347;
+      --line: rgba(0, 212, 255, .18);
+      --grid: rgba(120, 160, 200, .07);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", "Noto Serif SC",
-        "Songti SC", serif;
-      background: var(--paper);
-      color: var(--ink);
-      line-height: 1.9;
+      font-family: "SF Mono", "JetBrains Mono", "Cascadia Code", Consolas,
+        "Noto Sans JP", "PingFang SC", monospace, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.8;
       overflow-x: hidden;
     }
-    .sans {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-        "Hiragino Sans", "Noto Sans JP", sans-serif;
-    }
 
-    /* 宣纸晕染 */
-    body::before {
-      content: "";
-      position: fixed; inset: 0;
-      background:
-        radial-gradient(ellipse 900px 500px at 85% -5%, rgba(176,141,79,.10), transparent 60%),
-        radial-gradient(ellipse 700px 600px at 8% 105%, rgba(160,58,46,.06), transparent 55%);
-      pointer-events: none;
-      z-index: 0;
+    /* 背景层：网格 + 光晕 */
+    .bg-layer {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
     }
+    .bg-grid {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(ellipse 90% 70% at 50% 35%, #000 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 35%, #000 40%, transparent 100%);
+    }
+    .bg-glow {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 620px 380px at 78% 8%, rgba(0,212,255,.10), transparent 65%),
+        radial-gradient(ellipse 560px 420px at 12% 92%, rgba(139,92,246,.08), transparent 60%);
+    }
+    /* 扫描线动画 */
+    .bg-scan {
+      position: absolute; left: 0; right: 0; top: -2px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0,212,255,.35), transparent);
+      animation: scan 7s linear infinite;
+    }
+    @keyframes scan { to { top: 100%; } }
+
+    .wrap { position: relative; z-index: 1; }
+
+    /* ============ 顶部导航 ============ */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 28px;
+      background: rgba(5, 11, 20, .85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-logo {
+      font-size: 16px; font-weight: 700; letter-spacing: .12em;
+      color: var(--fg); text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo .mark {
+      width: 26px; height: 26px; flex: none;
+      background:
+        linear-gradient(135deg, var(--cyan), var(--violet));
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: #04121c; font-size: 15px; font-weight: 800;
+    }
+    .nav-links { display: flex; gap: 26px; }
+    .nav-links a {
+      color: var(--fg-dim); text-decoration: none;
+      font-size: 12.5px; letter-spacing: .18em;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    @media (max-width: 640px) { .nav-links { display: none; } }
 
     /* ============ Hero ============ */
     .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      min-height: calc(100vh - 60px);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
       text-align: center;
-      padding: 48px 24px 72px;
+      padding: 60px 24px;
     }
-    /* 远山淡墨 */
-    .mountains {
-      position: absolute; inset: auto 0 0 0;
-      height: 32vh; min-height: 180px;
-      z-index: 0; opacity: .85;
-    }
-    .hero > * { position: relative; z-index: 1; }
-
-    .seal {
-      width: 64px; height: 64px;
-      background: var(--cinnabar);
-      color: var(--paper);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 34px; font-weight: 700;
-      box-shadow: 0 4px 18px rgba(160,58,46,.35);
-      margin-bottom: 28px;
-      transform: rotate(-3deg);
-      user-select: none;
-    }
-    .hero-kana {
-      font-size: 15px; letter-spacing: .55em;
-      color: var(--ink-faint);
-      text-indent: .55em;
-      margin-bottom: 6px;
+    .hero-kicker {
+      font-size: 12px; letter-spacing: .5em; text-indent: .5em;
+      color: var(--cyan);
+      margin-bottom: 18px;
     }
     .hero-title {
-      font-size: clamp(40px, 9vw, 84px);
+      font-size: clamp(38px, 8.5vw, 78px);
       font-weight: 800;
-      letter-spacing: .01em;
-      line-height: 1.15;
-      /* 水墨渐变 */
-      background: linear-gradient(115deg, var(--ink) 30%, var(--ink-soft) 60%, var(--cinnabar) 95%);
+      letter-spacing: -.01em; line-height: 1.1;
+      background: linear-gradient(100deg, #eaf6ff 20%, var(--cyan) 55%, var(--violet) 90%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .hero-sub {
-      margin-top: 14px;
-      font-size: clamp(15px, 2.6vw, 20px);
-      color: var(--ink-soft);
-      letter-spacing: .35em; text-indent: .35em;
+      margin-top: 16px;
+      font-size: clamp(14px, 2.6vw, 18px);
+      color: var(--fg-dim);
+      letter-spacing: .3em; text-indent: .3em;
     }
     .hero-en {
-      margin-top: 10px;
-      font-size: 13px;
-      letter-spacing: .25em;
-      color: var(--ink-faint);
+      margin-top: 8px;
+      font-size: 12px; letter-spacing: .3em;
+      color: rgba(125,147,173,.7);
       text-transform: uppercase;
     }
-    .status-pill {
-      display: inline-flex; align-items: center; gap: 10px;
-      margin-top: 44px;
-      padding: 10px 26px;
-      border: 1px solid rgba(160,58,46,.45);
-      border-radius: 999px;
-      font-size: 14px;
-      letter-spacing: .3em; text-indent: .3em;
-      color: var(--cinnabar-deep);
-      background: rgba(245,240,230,.72);
-      backdrop-filter: blur(4px);
-    }
-    .dot {
-      width: 9px; height: 9px; border-radius: 50%;
-      background: var(--cinnabar);
-      animation: ink-pulse 2.2s ease-in-out infinite;
-    }
-    @keyframes ink-pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: .35; transform: scale(.7); }
-    }
-    .scroll-hint {
-      margin-top: 56px;
-      font-size: 12px; letter-spacing: .4em; text-indent: .4em;
-      color: var(--ink-faint);
-      animation: drift 2.6s ease-in-out infinite;
-    }
-    @keyframes drift {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(6px); }
-    }
 
-    /* 竖排装饰（宽屏） */
-    .vertical-motto {
-      position: absolute;
-      top: 50%; transform: translateY(-50%);
-      writing-mode: vertical-rl;
-      font-size: 14px; letter-spacing: .5em;
-      color: rgba(87,83,76,.45);
-      display: none;
+    /* 终端窗口 */
+    .terminal {
+      margin-top: 52px;
+      width: min(680px, 100%);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .5), 0 0 40px rgba(0,212,255,.07);
+      text-align: left;
+      backdrop-filter: blur(6px);
     }
-    .vertical-motto.left { left: 5vw; }
-    .vertical-motto.right { right: 5vw; }
-    @media (min-width: 1000px) { .vertical-motto { display: block; } }
+    .term-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 11px 16px;
+      background: rgba(10, 21, 36, .9);
+      border-bottom: 1px solid var(--line);
+    }
+    .term-bar i {
+      width: 11px; height: 11px; border-radius: 50%;
+      display: inline-block;
+    }
+    .term-bar i:nth-child(1) { background: #ff5f57; }
+    .term-bar i:nth-child(2) { background: #febc2e; }
+    .term-bar i:nth-child(3) { background: #28c840; }
+    .term-bar span {
+      margin-left: 8px;
+      font-size: 11px; letter-spacing: .14em;
+      color: var(--fg-dim);
+    }
+    .term-body {
+      padding: 20px 22px 26px;
+      font-size: 13.5px;
+      line-height: 2;
+    }
+    .term-body .ln { white-space: pre-wrap; }
+    .c-cmd { color: #eaf6ff; }
+    .c-cmd::before { content: "$ "; color: var(--green); font-weight: 700; }
+    .c-ok  { color: var(--green); }
+    .c-dim { color: var(--fg-dim); }
+    .c-key { color: var(--cyan); }
+    .c-val { color: var(--amber); }
+    .c-bracket { color: rgba(125,147,173,.8); }
+    .cursor {
+      display: inline-block; width: 8px; height: 16px;
+      background: var(--cyan); vertical-align: -2px;
+      animation: blink 1.1s steps(1) infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .status-chip {
+      margin-top: 40px;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 10px 24px;
+      font-size: 13px; letter-spacing: .3em; text-indent: .3em;
+      color: var(--green);
+      border: 1px solid rgba(34,224,160,.4);
+      border-radius: 999px;
+      background: rgba(34,224,160,.06);
+    }
+    .status-chip .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 10px rgba(34,224,160,.9);
+      animation: signal 2s ease-in-out infinite;
+    }
+    @keyframes signal {
+      0%,100% { opacity: 1; }
+      50% { opacity: .3; }
+    }
 
     /* ============ 通用 section ============ */
-    section { position: relative; z-index: 1; }
-    .section-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 72px 24px;
-    }
-    .sec-head { text-align: center; margin-bottom: 40px; }
-    .sec-head .rule {
-      width: 72px; height: 3px;
-      margin: 0 auto 18px;
-      background: linear-gradient(90deg, transparent, var(--cinnabar), transparent);
+    section { padding: 84px 24px; }
+    .section-inner { max-width: 960px; margin: 0 auto; }
+    .sec-head { text-align: center; margin-bottom: 48px; }
+    .sec-tag {
+      display: inline-block;
+      font-size: 11px; letter-spacing: .3em;
+      color: var(--cyan);
+      border: 1px solid var(--line);
+      padding: 5px 16px;
+      border-radius: 999px;
+      background: var(--cyan-soft);
+      margin-bottom: 18px;
     }
     .sec-title {
       font-size: clamp(22px, 4vw, 30px);
-      font-weight: 700; letter-spacing: .18em;
+      font-weight: 700; letter-spacing: .1em;
     }
     .sec-title small {
-      display: block;
-      margin-top: 6px;
-      font-size: 12px; letter-spacing: .3em;
-      color: var(--ink-faint);
-      font-weight: 400;
+      display: block; margin-top: 8px;
+      font-size: 12px; font-weight: 400;
+      letter-spacing: .25em;
+      color: var(--fg-dim);
       text-transform: uppercase;
     }
 
-    /* ============ 事業内容 ============ */
-    .biz {
-      background: var(--paper-deep);
-      border-top: 1px solid rgba(43,43,40,.08);
-      border-bottom: 1px solid rgba(43,43,40,.08);
-    }
-    .biz-grid {
+    /* ============ 技术栈 / 事业 ============ */
+    .stack { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .stack-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
     }
-    .biz-card {
-      background: var(--paper);
-      border: 1px solid rgba(43,43,40,.12);
-      border-radius: 6px;
-      padding: 30px 26px;
-      transition: transform .25s ease, box-shadow .25s ease;
+    .tech-card {
+      position: relative;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 28px 24px;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+      overflow: hidden;
     }
-    .biz-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(43,43,40,.10);
+    .tech-card::before {
+      content: "";
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--violet));
+      opacity: 0;
+      transition: opacity .25s;
     }
-    .biz-card .num {
-      font-size: 13px; color: var(--cinnabar);
-      letter-spacing: .2em; margin-bottom: 10px;
+    .tech-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0,212,255,.45);
+      box-shadow: 0 18px 46px rgba(0,0,0,.45), 0 0 30px rgba(0,212,255,.08);
     }
-    .biz-card h3 {
-      font-size: 19px; font-weight: 700;
-      letter-spacing: .06em; margin-bottom: 10px;
+    .tech-card:hover::before { opacity: 1; }
+    .tech-card .glyph { font-size: 26px; margin-bottom: 14px; }
+    .tech-card h3 {
+      font-size: 17px; font-weight: 700; letter-spacing: .06em;
+      margin-bottom: 6px;
     }
-    .biz-card .en {
-      font-size: 11px; letter-spacing: .18em;
-      color: var(--gold); text-transform: uppercase;
+    .tech-card .en {
+      font-size: 10.5px; letter-spacing: .22em;
+      color: var(--cyan); text-transform: uppercase;
       margin-bottom: 12px;
     }
-    .biz-card p { font-size: 14px; color: var(--ink-soft); }
+    .tech-card p { font-size: 13px; color: var(--fg-dim); }
 
     /* ============ 会社概要 ============ */
     .profile-table {
       width: 100%;
       border-collapse: separate; border-spacing: 0;
-      background: var(--paper);
-      border: 1px solid rgba(43,43,40,.14);
-      border-radius: 6px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
       overflow: hidden;
+      backdrop-filter: blur(6px);
     }
     .profile-table th, .profile-table td {
-      padding: 18px 22px;
-      border-bottom: 1px solid rgba(43,43,40,.10);
-      font-size: 15px;
-      text-align: left;
+      padding: 18px 24px;
+      font-size: 14px; text-align: left;
+      border-bottom: 1px solid rgba(120,160,200,.1);
     }
     .profile-table th {
-      width: 34%;
-      background: rgba(236,229,211,.6);
-      color: var(--ink-soft);
+      width: 32%;
+      color: var(--cyan);
       font-weight: 600;
-      letter-spacing: .12em;
+      letter-spacing: .14em;
+      background: rgba(0,212,255,.05);
       white-space: nowrap;
     }
     .profile-table tr:last-child th, .profile-table tr:last-child td { border-bottom: none; }
     .note {
-      margin-top: 18px;
-      font-size: 12.5px;
-      color: var(--ink-faint);
+      margin-top: 18px; font-size: 12px;
+      color: rgba(125,147,173,.75);
       letter-spacing: .04em;
     }
 
     /* ============ Contact ============ */
     .contact { text-align: center; }
-    .contact .zen-text {
+    .contact .big {
       font-size: clamp(18px, 3.4vw, 24px);
-      letter-spacing: .3em; text-indent: .3em;
-      color: var(--ink);
+      letter-spacing: .24em; text-indent: .24em;
       margin-bottom: 14px;
     }
-    .contact p { font-size: 14px; color: var(--ink-soft); }
+    .contact p { font-size: 14px; color: var(--fg-dim); }
     .contact .mail {
-      display: inline-block;
-      margin-top: 22px;
-      font-size: 15px;
-      letter-spacing: .1em;
-      color: var(--cinnabar-deep);
-      border-bottom: 1px solid rgba(160,58,46,.5);
-      padding-bottom: 2px;
+      display: inline-block; margin-top: 24px;
+      font-size: 15px; letter-spacing: .12em;
+      color: var(--cyan);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px 28px;
       text-decoration: none;
+      background: var(--cyan-soft);
+      transition: all .22s;
     }
-    .contact .mail:hover { color: var(--cinnabar); }
+    .contact .mail:hover {
+      background: rgba(0,212,255,.18);
+      box-shadow: 0 0 24px rgba(0,212,255,.25);
+      color: #eaf6ff;
+    }
 
     /* ============ Footer ============ */
     footer {
-      position: relative; z-index: 1;
+      border-top: 1px solid var(--line);
       text-align: center;
-      padding: 34px 24px 40px;
-      font-size: 12.5px;
-      color: var(--ink-faint);
-      letter-spacing: .08em;
-      border-top: 1px solid rgba(43,43,40,.10);
+      padding: 30px 24px;
+      font-size: 12px;
+      color: rgba(125,147,173,.8);
+      letter-spacing: .1em;
     }
-    footer .red-line {
-      width: 100%; max-width: 120px;
-      height: 1px;
-      margin: 0 auto 18px;
-      background: linear-gradient(90deg, transparent, var(--cinnabar), transparent);
+    footer .sys {
+      margin-bottom: 10px;
+      font-size: 10.5px; letter-spacing: .2em;
+      color: rgba(125,147,173,.55);
     }
 
     @media (max-width: 600px) {
-      .profile-table th, .profile-table td { padding: 14px 16px; font-size: 13.5px; }
-      .section-inner { padding: 56px 18px; }
+      .profile-table th, .profile-table td { padding: 14px 16px; font-size: 12.5px; }
+      section { padding: 60px 18px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ==================== Hero ==================== -->
-  <header class="hero">
-    <div class="seal" role="img" aria-label="準備中之印">準</div>
-    <p class="hero-kana sans">ホモトランステクノロジー</p>
-    <h1 class="hero-title">HomoTrans Technology</h1>
-    <p class="hero-sub">ホモトランステクノロジー合同会社</p>
-    <p class="hero-en sans">Robotics &amp; AI Systems R&amp;D</p>
+  <div class="bg-layer">
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+    <div class="bg-scan"></div>
+  </div>
 
-    <div class="status-pill sans">
-      <span class="dot"></span>
-      <span>Coming Soon — 設立準備中</span>
-    </div>
-
-    <p class="scroll-hint sans">下へScroll</p>
-
-    <span class="vertical-motto left sans" aria-hidden="true">機巧之術&nbsp;&nbsp;以利萬人</span>
-    <span class="vertical-motto right sans" aria-hidden="true">Research&nbsp;·&nbsp;Develop&nbsp;·&nbsp;Deliver</span>
-
-    <!-- 远山淡墨 -->
-    <svg class="mountains" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,320 L0,240 Q180,150 360,215 T720,190 T1080,230 T1440,190 L1440,320 Z"
-            fill="rgba(87,83,76,.16)"/>
-      <path d="M0,320 L0,272 Q240,205 480,255 T960,245 T1440,258 L1440,320 Z"
-            fill="rgba(87,83,76,.10)"/>
-      <path d="M0,320 L0,298 Q320,255 640,288 T1280,290 T1440,285 L1440,320 Z"
-            fill="rgba(160,58,46,.07)"/>
-    </svg>
-  </header>
-
-  <!-- ==================== 事業内容 ==================== -->
-  <section class="biz">
-    <div class="section-inner">
-      <div class="sec-head">
-        <div class="rule"></div>
-        <h2 class="sec-title">事業内容<small>Our Business — 定款に基づく主な事業</small></h2>
+  <div class="wrap">
+    <!-- ============ Nav ============ -->
+    <nav>
+      <a class="nav-logo" href="#top">
+        <span class="mark">H</span>
+        <span>HOMOTRANS</span>
+      </a>
+      <div class="nav-links">
+        <a href="#stack">TECH</a>
+        <a href="#profile">COMPANY</a>
+        <a href="#contact">CONTACT</a>
       </div>
-      <div class="biz-grid">
-        <div class="biz-card">
-          <div class="num sans">01</div>
-          <h3>ロボットシステム</h3>
-          <div class="en sans">Robotics</div>
-          <p>ロボット・ロボットシステム及び関連機器の研究、開発、設計、製造、輸出入及び保守。</p>
+    </nav>
+
+    <!-- ============ Hero ============ -->
+    <header class="hero" id="top">
+      <p class="hero-kicker">ROBOTICS&nbsp;×&nbsp;AI&nbsp;×&nbsp;EMBEDDED</p>
+      <h1 class="hero-title">HomoTrans Technology</h1>
+      <p class="hero-sub">ホモトランステクノロジー合同会社</p>
+      <p class="hero-en">Robotics &amp; AI Systems R&amp;D · Japan</p>
+
+      <div class="terminal" role="img" aria-label="会社設立ステータスのターミナル表示">
+        <div class="term-bar">
+          <i></i><i></i><i></i>
+          <span>homotrans — status</span>
         </div>
-        <div class="biz-card">
-          <div class="num sans">02</div>
-          <h3>人工知能（AI）</h3>
-          <div class="en sans">AI &amp; Software</div>
-          <p>AI を利用した製品、システム及びソフトウェアの研究、開発、提供、運用及び保守。</p>
-        </div>
-        <div class="biz-card">
-          <div class="num sans">03</div>
-          <h3>組込み・制御・IoT</h3>
-          <div class="en sans">Embedded &amp; Control</div>
-          <p>組込みシステム、制御システム、クラウド・IoT 及びデータ処理・解析システムの研究開発と提供。</p>
-        </div>
-        <div class="biz-card">
-          <div class="num sans">04</div>
-          <h3>技術支援・導入支援</h3>
-          <div class="en sans">Consulting</div>
-          <p>受託開発、カスタマイズ、導入支援、技術コンサルティング、教育研修及びアフターサービス。</p>
+        <div class="term-body">
+          <div class="ln"><span class="c-cmd">homotrans --init</span></div>
+          <div class="ln"><span class="c-bracket">[</span><span class="c-ok">✓</span><span class="c-bracket">]</span> <span class="c-dim">company&nbsp;</span><span class="c-key">form</span> <span class="c-dim">=</span> <span class="c-val">合同会社 (LLC)</span></div>
+          <div class="ln"><span class="c-bracket">[</span><span class="c-ok">✓</span><span class="c-bracket">]</span> <span class="c-dim">core&nbsp;</span><span class="c-key">business</span> <span class="c-dim">=</span> <span class="c-val">robotics · AI systems R&amp;D</span></div>
+          <div class="ln"><span class="c-bracket">[</span><span class="c-ok">✓</span><span class="c-bracket">]</span> <span class="c-dim">fiscal&nbsp;</span><span class="c-key">year</span> <span class="c-dim">=</span> <span class="c-val">Apr 1 – Mar 31</span></div>
+          <div class="ln"><span class="c-bracket">[</span><span class="c-amber" style="color:var(--amber)">…</span><span class="c-bracket">]</span> <span class="c-dim">incorporation&nbsp;</span><span class="c-key">status</span> <span class="c-dim">=</span> <span class="c-val">in preparation</span> <span class="c-dim">— 設立準備中</span></div>
+          <div class="ln"><span class="c-cmd">&nbsp;</span><span class="cursor"></span></div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ==================== 会社概要 ==================== -->
-  <section>
-    <div class="section-inner">
-      <div class="sec-head">
-        <div class="rule"></div>
-        <h2 class="sec-title">会社概要<small>Company Profile</small></h2>
+      <div class="status-chip">
+        <span class="dot"></span>
+        <span>COMING SOON — 設立準備中</span>
       </div>
-      <table class="profile-table sans">
-        <tr>
-          <th>商号</th>
-          <td>ホモトランステクノロジー合同会社（HomoTrans Technology）</td>
-        </tr>
-        <tr>
-          <th>会社の種類</th>
-          <td>合同会社（LLC）— <strong>設立準備中</strong></td>
-        </tr>
-        <tr>
-          <th>主な事業</th>
-          <td>ロボット・人工知能（AI）関連の製品・システムの研究開発、設計、製造、販売、導入支援及び保守サービス</td>
-        </tr>
-        <tr>
-          <th>本店</th>
-          <td>日本（所在地は準備中）</td>
-        </tr>
-        <tr>
-          <th>事業年度</th>
-          <td>4月1日 ～ 翌年3月31日</td>
-        </tr>
-        <tr>
-          <th>ウェブサイト</th>
-          <td>www.homotrans.com</td>
-        </tr>
-      </table>
-      <p class="note sans">※ 当社は現在設立準備中のため、本ページの内容は予定であり、今後変更される場合がございます。</p>
-    </div>
-  </section>
+    </header>
 
-  <!-- ==================== Contact ==================== -->
-  <section class="contact">
-    <div class="section-inner">
-      <div class="sec-head">
-        <div class="rule"></div>
-        <h2 class="sec-title">お問い合わせ<small>Contact</small></h2>
+    <!-- ============ 技术领域 ============ -->
+    <section class="stack" id="stack">
+      <div class="section-inner">
+        <div class="sec-head">
+          <div class="sec-tag">01 / TECH STACK</div>
+          <h2 class="sec-title">事業内容<small>Core Technology Domains — 定款に基づく</small></h2>
+        </div>
+        <div class="stack-grid">
+          <div class="tech-card">
+            <div class="glyph">🤖</div>
+            <h3>ロボットシステム</h3>
+            <div class="en">Robotics</div>
+            <p>ロボット・ロボットシステム及び関連機器の研究、開発、設計、製造、輸出入及び保守。</p>
+          </div>
+          <div class="tech-card">
+            <div class="glyph">🧠</div>
+            <h3>人工知能（AI）</h3>
+            <div class="en">AI &amp; Software</div>
+            <p>AI を活用した製品、システム及びソフトウェアの研究、開発、提供、運用及び保守。</p>
+          </div>
+          <div class="tech-card">
+            <div class="glyph">⚙️</div>
+            <h3>組込み・制御・IoT</h3>
+            <div class="en">Embedded / Control / IoT</div>
+            <p>組込みシステム、制御システム、クラウド・IoT 及びデータ処理・解析システムの研究開発と提供。</p>
+          </div>
+          <div class="tech-card">
+            <div class="glyph">📡</div>
+            <h3>技術支援・導入支援</h3>
+            <div class="en">Consulting &amp; Integration</div>
+            <p>受託開発、カスタマイズ、導入支援、技術コンサルティング、教育研修及びアフターサービス。</p>
+          </div>
+        </div>
       </div>
-      <p class="zen-text">正式オープンまで&nbsp;今しばらくお待ちください</p>
-      <p class="sans">ご用命・お問い合わせは、正式リリース後に順次受け付けてまいります。</p>
-      <a class="mail sans" href="mailto:info@homotrans.com">info@homotrans.com</a>
-    </div>
-  </section>
+    </section>
 
-  <!-- ==================== Footer ==================== -->
-  <footer>
-    <div class="red-line"></div>
-    <p class="sans">&copy; 2026 ホモトランステクノロジー合同会社（HomoTrans Technology）&nbsp;All rights reserved.</p>
-  </footer>
+    <!-- ============ 会社概要 ============ -->
+    <section id="profile">
+      <div class="section-inner">
+        <div class="sec-head">
+          <div class="sec-tag">02 / COMPANY</div>
+          <h2 class="sec-title">会社概要<small>Company Profile</small></h2>
+        </div>
+        <table class="profile-table">
+          <tr>
+            <th>商号</th>
+            <td>ホモトランステクノロジー合同会社（HomoTrans Technology）</td>
+          </tr>
+          <tr>
+            <th>会社の種類</th>
+            <td>合同会社（LLC）— <strong style="color:var(--amber)">設立準備中</strong></td>
+          </tr>
+          <tr>
+            <th>主な事業</th>
+            <td>ロボット・人工知能（AI）関連の製品・システムの研究開発、設計、製造、販売、導入支援及び保守サービス</td>
+          </tr>
+          <tr>
+            <th>本店</th>
+            <td>日本（所在地は準備中）</td>
+          </tr>
+          <tr>
+            <th>事業年度</th>
+            <td>4月1日 ～ 翌年3月31日</td>
+          </tr>
+          <tr>
+            <th>ウェブサイト</th>
+            <td>www.homotrans.com</td>
+          </tr>
+        </table>
+        <p class="note">※ 当社は現在設立準備中のため、本ページの内容は予定であり、今後変更される場合がございます。</p>
+      </div>
+    </section>
+
+    <!-- ============ Contact ============ -->
+    <section class="contact" id="contact">
+      <div class="section-inner">
+        <div class="sec-head">
+          <div class="sec-tag">03 / CONTACT</div>
+          <h2 class="sec-title">お問い合わせ<small>Contact</small></h2>
+        </div>
+        <p class="big">正式オープンまで&nbsp今しばらくお待ちください</p>
+        <p>ご用命・お問い合わせは、正式リリース後に順次受け付けてまいります。</p>
+        <a class="mail" href="mailto:info@homotrans.com">info@homotrans.com</a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="sys">SYSTEM STATUS: PRE-LAUNCH · EST. 2026 · JAPAN</div>
+      &copy; 2026 ホモトランステクノロジー合同会社（HomoTrans Technology） All rights reserved.
+    </footer>
+  </div>
 
 </body>
 </html>
